@@ -35,8 +35,7 @@
         cpfFormat: function(data){
             return z.cpfStrip(data).replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
         }
-    };
-
+    }; 
     $(window).bind("load", function() {
         $('[data-format="toupper"]').on("blur", function(data){
             var upper = y.toUpperText($(this).val());
