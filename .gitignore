@@ -123,7 +123,7 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
-.idea
+.idea/
 
 # Publish Web Output
 *.Publish.xml
