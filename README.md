@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-#Arcnet Simple Mask Plugin
-A jQuery Plugin to make masks on form fields and HTML elements with some mask defined.
+#Arcnet Simple Format Plugin
+A jQuery Plugin to make formats on form fields and HTML elements with some formats defined.
 
 ##Compatibility
 
-Jquery Arcnet Simple Mask Plugin has been tested with jQuery 1.7+ on all major browsers:
+Jquery Arcnet Simple Format Plugin has been tested with jQuery 1.7+ on all major browsers:
 
 * Firefox 2+ (Win, Mac, Linux);
 * IE7+ (Win);
@@ -14,97 +13,68 @@ Jquery Arcnet Simple Mask Plugin has been tested with jQuery 1.7+ on all major b
 
 
 ##Basic Usage Examples
-###Inserting
+###Mask using data-format attribute
+To get your format applied with the data-format attribute just use it in your input field, when you unfocus(on-blur)the input the magic happens and the input is formatted.
+
 ```bash
-$(document).ready(function(){
-  $('element').arcnetmask('11/11/1111'); //Date
-  $('element').arcnetmask('00:00:00'); //Time
-  $('element').arcnetmask('00/00/0000 00:00:00'); //Date_Time
-  $('element').arcnetmask('00000-000'); //Cep
-  $('element').arcnetmask('0000-0000'); //Phone
-  $('element').arcnetmask('(00) 0000-0000'); //Phone_DDD
-  $('element').arcnetmask('AAA 000-S0S');
-  $('element').arcnetmask('000.000.000-00', {reverse: true}); //Cpf
-  $('element').arcnetmask('000.000.000.000.000,00', {reverse: true}); //Money
-  $('element').arcnetmask("#.##0,00", {reverse: true, maxlength: false}); //Money
-  $('element').arcnetmask('##0,00%', {reverse: true}); //Percent
-}
+<input type="text" data-format="toupper" /><br>
+//=>all letters typed will stay uppercase
+
+<input type="text" data-format="tolower" /><br>
+//=>all letters typed will stay lowerrcase
+
+<input type="text" data-format="firstupper" /><br>
+//=>the first word typed will stay with the first letter in uppercase
+
+<input type="text" data-format="allfirstsupper" /><br>
+//=>all letters typed will stay with the first letter in uppercase
+
+<input type="text" data-format="cnpj" /><br>
+//=>The sequence of numbers typed will stay format as a cnpj format
+
+<input type="text" data-format="cnpjstripe" /><br>
+//the cnpj format typed will stay with only numbers, removing the special characters
+
+<input type="text" data-format="cpf" /><br>
+//=>The sequence of numbers typed will stay format as a cpf format
+
+<input type="text" data-format="cpfstripe" /><br>
+//the cpf format typed will stay with only numbers, removing the special characters
 ```
 
-###Removing
+###Mask using data-format-realtime attribute
+Is the same of data-format, the only difference is that as you type the word is formatted
 ```bash
-$(document).ready(function(){
-  $('element').arcnetunmask();
-}
+<input type="text" data-format-realtime="toupper" /><br>
+//=>all letters typed will stay uppercase instantly
+
+<input type="text" data-format-realtime="tolower" /><br>
+//=>all letters typed will stay lowerrcase instantly
+
+<input type="text" data-format-realtime="firstupper" /><br>
+//=>the first word typed will stay with the first letter in uppercase instantly
+
 ```
 
-###Reverse Attribute
-With this attribute the mask will be placed from the right to the left (that's why reverse:true is defined).
-
-##Mask using data-mask attribute
-To get your mask applied with the data-mask attribute just use it as the same way you use with the $.mask function. 
-
-You can put on your own:
+##Using the methods
 ```bash
-  <input type="text" data-inputmask="#####-###"/>
-```
+z.cnpjStrip("91.576.861/0001-78")
+//=>91576861000178
 
-Or use some defined types:
-```bash
-<input type="text" name="field-name" data-inputmask="celular" />
-<input type="text" name="field-name" data-inputmask="cellphone" />
+z.cnpjFormat(91576861000178)
+//=>91.576.861/0001-78
 
-<input type="text" data-inputmask="cnpj"/>
+z.cpfStrip("445.460.157-71")
+//=>44546015771
 
-<input type="text" data-inputmask="cpf"/>
-
-<input type="text" data-inputmask="telefone"/>
-<input type="text" data-inputmask="phone"/>
-
-<input type="text" data-inputmask="fax"/>
-
-<input type="text" data-inputmask="ncm"/>
-
-<input type="text" data-inputmask="dinheiro"/> //this mask is not real time typing
-<input type="text" data-inputmask="money"/>
-
-<input type="text" data-inputmask="dinheiro3"/> //this mask is real time typing :)
-<input type="text" data-inputmask="money3"/>
-
-<input type="text" data-inputmask="data"/>
-<input type="text" data-inputmask="date"/>
-
-<input type="text" data-inputmask="hora"/>
-<input type="text" data-inputmask="time"/>
-
-<input type="text" data-inputmask="data_hora"/>
-<input type="text" data-inputmask="date_time"/>
-
-<input type="text" data-inputmask="cep"/>
-
-<input type="text" data-inputmask="porcentagem"/>
-<input type="text" data-inputmask="percent"/>
-```
-
-You also can restrict some letters and types.
-```bash
-<input type="text" data-inputmask-restrict="numeros"/> //Receives only numbers.
-<input type="text" data-inputmask-restrict="numbers"/>
-
-<input type="text" data-inputmask-restrict="letras"/> //Receives only letters.
-<input type="text" data-inputmask-restrict="letters"/>
-
-<input type="text" data-inputmask-restrict="alfanumerico"/> //Receives only alphanumeric.
-<input type="text" data-inputmask-restrict="alphanumeric"/>
-
-<input type="text" data-inputmask-restrictwords="qwerty"/> //Restricts the letters in the parameter
-<input type="text" data-inputmask-restrictwords="asdfg"/>
+z.cpfFormat(44546015771)
+//=>445.460.157-71
 ```
 
 #License
-Created by Weslley Neri on 2014-02-20 - https://github.com/weslley39
+Created by Weslley Neri on 2014-02-25 - https://github.com/weslley39
 
- Copyright (c) 2014 Arcnet - Automação Comercial
+ Copyright (c) 2014 Arcnet - Automação Comercial (http://arcnet.com.br/)
 
  The MIT License (http://www.opensource.org/licenses/mit-license.php)
 
@@ -128,9 +98,3 @@ Created by Weslley Neri on 2014-02-20 - https://github.com/weslley39
  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
-=======
-Arcnet-Simple-Format
-====================
-
-A simple format for some especifi things like Cnpj and Cpf
->>>>>>> a5bfbd1303d5d92a15cc3578787e239f4a1c0a6c
