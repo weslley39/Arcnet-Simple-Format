@@ -110,10 +110,6 @@
             $(this).val(z.cpfStrip($(this).val()));
             return true;
         });
-
     });
-
-
-
 })(window.jQuery || window.Zepto);
 
