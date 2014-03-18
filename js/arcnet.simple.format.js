@@ -2,7 +2,7 @@
  * Created by Weslley Neri on 25/02/14.
  */
 (function () {
-    var y = {
+     y = {
         toUpperText: function(data){
             var dataString = data.toString();
             return dataString.toUpperCase();
@@ -15,10 +15,14 @@
 
         toFirstUpper: function(data){
             return data.charAt(0).toUpperCase() + data.slice(1);
-        }
+        },
+
+         toCurrency: function(data){
+               return data.toString().replace(".","").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+         }
     };
 
-    var z = {
+     z = {
 
         cnpjStrip: function(data){
             return (data || "").toString().replace(/[^\d]/g, "");
@@ -35,7 +39,15 @@
         cpfFormat: function(data){
             return z.cpfStrip(data).replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
         }
-    }; 
+    };
+
+    d = {
+        miliToSecs: function(data){
+            var mili = data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', '');
+            var dataJavascript = new Date(eval(mili));
+            return dataJavascript.toLocaleDateString();
+        }
+    }
     $(window).bind("load", function() {
         $('[data-format="toupper"]').on("blur", function(data){
             var upper = y.toUpperText($(this).val());
@@ -90,6 +102,19 @@
             return true;
         });
 
+        $('[data-format="toCurrency"]').on("blur", function(data){
+            var upper = y.toCurrency($(this).val());
+            $(this).val(upper);
+            return true;
+        });
+
+        $('[data-format-realtime="toCurrency"]').keypress(function(data){
+            var letter = String.fromCharCode( data.keyCode || data.which );
+            var currency = y.toCurrency($(this).val() + letter);
+            $(this).val(currency);
+            return false;
+        });
+
         $('[data-format="cnpj"]').on("blur", function(){
             $(this).val(z.cnpjFormat($(this).val()));
             return true;
@@ -107,6 +132,11 @@
 
         $('[data-format="cpfstripe"]').on("blur", function(){
             $(this).val(z.cpfStrip($(this).val()));
+            return true;
+        });
+
+        $('[data-format="militodate"]').on("blur", function(){
+            $(this).val(d.miliToSecs($(this).val()));
             return true;
         });
     });
