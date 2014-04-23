@@ -40,6 +40,12 @@ To get your format applied with the data-format attribute just use it in your in
 
 <input type="text" data-format="cpfstripe" /><br>
 //the cpf format typed will stay with only numbers, removing the special characters
+
+<input type="text" data-format="toCurrency" /><br>
+//the string typed in the input will be converted for currency
+
+<input type="text" data-format="militodate" /><br>
+//the millisecods typel will be converted in date like DD/MM/YY
 ```
 
 ###Mask using data-format-realtime attribute
@@ -54,6 +60,8 @@ Is the same of data-format, the only difference is that as you type the word is 
 <input type="text" data-format-realtime="firstupper" /><br>
 //=>the first word typed will stay with the first letter in uppercase instantly
 
+<input type="text" data-format-realtime="toCurrency" /><br>
+//=>the string typed in the input will be converted for currency instantly
 ```
 
 ##Using the methods
