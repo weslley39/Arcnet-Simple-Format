@@ -2,7 +2,7 @@
  * Created by Weslley Neri on 25/02/14.
  */
 (function () {
-     y = {
+     window.y = {
         toUpperText: function(data){
             var dataString = data.toString();
             return dataString.toUpperCase();
@@ -22,7 +22,7 @@
          }
     };
 
-     z = {
+    window.z = {
 
         cnpjStrip: function(data){
             return (data || "").toString().replace(/[^\d]/g, "");
@@ -38,10 +38,24 @@
 
         cpfFormat: function(data){
             return z.cpfStrip(data).replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+        },
+
+        telefoneFormat: function(data){
+            return (data || "").toString().replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
+        },
+
+        celularFormat: function(data){
+            if (data != "" && data.length === 11){
+                return (data || "").toString().replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+            }else if(data != "" && data.length === 10){
+                return z.telefoneFormat(data)
+            }
         }
+
+
     };
 
-    d = {
+    window.d = {
         miliToSecs: function(data){
             var mili = data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', '');
             var dataJavascript = new Date(eval(mili));
@@ -137,6 +151,16 @@
 
         $('[data-format="militodate"]').on("blur", function(){
             $(this).val(d.miliToSecs($(this).val()));
+            return true;
+        });
+
+        $('[data-format="telefone"]').on("blur", function(){
+            $(this).val(z.telefoneFormat($(this).val()));
+            return true;
+        });
+
+        $('[data-format="celular"]').on("blur", function(){
+            $(this).val(z.celularFormat($(this).val()));
             return true;
         });
     });
