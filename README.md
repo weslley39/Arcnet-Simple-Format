@@ -46,6 +46,12 @@ To get your format applied with the data-format attribute just use it in your in
 
 <input type="text" data-format="militodate" /><br>
 //the millisecods typel will be converted in date like DD/MM/YY
+
+<input type="text" data-format="telefone" /><br>
+//the string typel will be converted in phone number like (XX) XXXX-XXXX
+
+<input type="text" data-format="celular" /><br>
+//the string typel will be converted in cellphone number like (XX) XXXX-XXXX or (XX) XXXXX-XXXX
 ```
 
 ###Mask using data-format-realtime attribute
@@ -77,6 +83,15 @@ z.cpfStrip("445.460.157-71")
 
 z.cpfFormat(44546015771)
 //=>445.460.157-71
+
+z.telefoneFormat(1199998888)
+//=>(11) 9999-8888
+
+z.celularFormat(1199998888)
+//=>((11) 9999-8888
+OR
+z.celularFormat(11999998888)
+//=>(11) 99999-8888
 ```
 
 #License
